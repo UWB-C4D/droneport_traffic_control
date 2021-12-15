@@ -6,3 +6,5 @@ The component is in the early experimental phase. Droneport Orchestrator is base
 >Song, B. D., Kim, J., & Morrison, J. R. (2016). Rolling Horizon Path Planning of an Autonomous System of UAVs for Persistent Cooperative Service: MILP Formulation and Efficient Heuristics. Journal of Intelligent & Robotic Systems, 84(1–4), 241–258. https://doi.org/10.1007/s10846-015-0280-5.
 
 In orchestrator.ipynb a MILP version with the original parameters is implemented, in orchestrator-lite.ipynb a simpler task with two drones and two missions will be implemented, where each drone has its own independent mission.
+
+In trajectory_planner.ipynb a nonlinear time-continous optimal control problem of trajectory planning considering the battery state of charge is solved.  The problem is transcribed using chebyshev pseudospectral collocation method to nonlinear program (NLP), which is solved with IPOPT solver.
