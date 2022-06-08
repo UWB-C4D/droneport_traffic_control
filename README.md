@@ -4,6 +4,7 @@ Droneport is a system for autonomous drone battery management. It consists of bo
 
 The component is in the early experimental phase. In preliminary phase the work described in 
 >Song, B. D., Kim, J., & Morrison, J. R. (2016). Rolling Horizon Path Planning of an Autonomous System of UAVs for Persistent Cooperative Service: MILP Formulation and Efficient Heuristics. Journal of Intelligent & Robotic Systems, 84(1–4), 241–258. https://doi.org/10.1007/s10846-015-0280-5.
+
 was closely studied. Attempts to implement the problem for Droneport can be found in the orchestrator.ipynb, where a MILP version with the original parameters is implemented, and in orchestrator-lite.ipynb a simpler task with two drones and two missions is prepared for implementation, where each drone has its own independent mission.
 
 Nevertheless, completing the mission with another drone would interfere with the customer's mission. Modifying it for the Droneport's parameters would require significant changes to the MILP. Therefore, the scheduling is solved with another approach, where the appropriate time to withdraw the drone is sought with well-known A* algorithm. This version of the Orchestrator is introduced with an example in simple_orchestrator.ipynb.
