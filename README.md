@@ -2,8 +2,15 @@
 
 Droneport is a system for autonomous drone battery management. It consists of both hardware and software components. One of the software components is Droneport Traffic Control (DPTC), which takes care of controlling the whole system, i.e., it sends commands to both drones and ports. Droneport Commander, the subsystem of DPTC, is responsible for communication with drones and Droneport devices. It also includes simple user interface that can be operated via a terminal. Another part of the DPTC is the so-called Droneport Orchestrator, whose purpose is to schedule the drone's battery replacement with respect to the specified missions and battery status. 
 
-The component is in the early experimental phase. Droneport Orchestrator is based on the work described in 
+The component is in the early experimental phase. In preliminary phase the work described in 
 >Song, B. D., Kim, J., & Morrison, J. R. (2016). Rolling Horizon Path Planning of an Autonomous System of UAVs for Persistent Cooperative Service: MILP Formulation and Efficient Heuristics. Journal of Intelligent & Robotic Systems, 84(1–4), 241–258. https://doi.org/10.1007/s10846-015-0280-5.
+was closely studied. Attempts to implement the problem for Droneport can be found in the orchestrator.ipynb, where a MILP version with the original parameters is implemented, and in orchestrator-lite.ipynb a simpler task with two drones and two missions is prepared for implementation, where each drone has its own independent mission.
+
+Nevertheless, completing the mission with another drone would interfere with the customer's mission. Modifying it for the Droneport's parameters would require significant changes to the MILP. Therefore, the scheduling is solved with another approach, where the appropriate time to withdraw the drone is sought with well-known A* algorithm. This version of the Orchestrator is introduced with an example in simple_orchestrator.ipynb.
+
+According to predicted SoC and evaluated costs for flight to Droneport platforms, the optimal time schedule is sought, which is composed of Drone ID, Droneport ID and mission sequence ID (SEQ_ID). Droneport Orchestrator was tested with randomly generated data, where drones are sent to mission with elliptical trajectory. Drone batteries have not sufficient battery capacity to complete whole mission; therefore, they are obliged to visit Droneport platforms for at least once. 
+
+The prediction of discharge rate is acquired based on distances between mission waypoints, the drone’s velocity, maximum flight time, and initial SoC. The cost of battery replacement is determined by the predicted drone battery drain during its flight to Droneport platform and back to the mission. The task is further limited by a fixed number of charged batteries in the Droneport platforms. The Orchestrator also performs a calculation of the expected flight time to the Droneport platform, based on which a time slot is entered into the schedule with a safe time reserve to avoid drone collisions near the DP platform.  
 
 In orchestrator.ipynb a MILP version with the original parameters is implemented, in orchestrator-lite.ipynb a simpler task with two drones and two missions will be implemented, where each drone has its own independent mission.
 
